@@ -6,6 +6,7 @@
         { "name": "firede", "email": "firede@firede.us" }
     ],
     "dependencies": {
+        "debug": "~0.7.3",
         "chalk": "~0.3.0",
         "path-to-regexp": "~0.0.2",
         "tiny-lr": "~0.0.5",
