@@ -11,41 +11,54 @@
 exports.baseDir = __dirname;
 
 /**
+ * 常用过滤器
+ * 
+ * @inner
+ * @namespace
+ */
+var commonFilters = {
+    ignoreNodeModules: '!node_modules/*',
+    ignoreVCSFiles: '!.(git|svn)/*'
+}
+
+/**
  * 任务配置
  * 
  * @type {Object}
  */
 exports.getTasks = function() {
     return {
-        'dev': {
+        'livereload': {
             filters: [
-                '*.js',
-                '!node_modules/',
-                '!.(git|svn)/'
+                '*.(html|js|coffee|less|styl|css)',
+                commonFilters.ignoreNodeModules,
+                commonFilters.ignoreVCSFiles
             ],
             events: [
                 'addedFiles',
-                'modifiedFiles',
-                'deletedFiles'
+                'modifiedFiles'
             ],
-            plugins: [
-                jshint(),
-                livereload()
-            ]
+            plugins: livereload()
         },
-        'rsync': {
-            filters: [
-                '*/',
-                '!node_modules/',
-                '!.(git|svn)'
-            ],
-            events: [
-                'addedFolders',
-                'modifiedFolders',
-                'deletedFolders'
-            ],
-            plugins: [ rsync() ]
-        }
+        // 配置示例，相关插件还没开发
+        // 'rsync': {
+        //     filters: [
+        //         '*.(js|css|html)',
+        //         '!node_modules/*',
+        //         '!.(git|svn)/*'
+        //     ],
+        //     events: [
+        //         'addedFiles',
+        //         'modifiedFiles',
+        //         'deletedFiles'
+        //     ],
+        //     plugins: [
+        //         jshint(),
+        //         csslint(),
+        //         htmlhint(),
+        //         rsync()
+        //     ]
+        // }
     }
 };
 
@@ -56,7 +69,7 @@ exports.getTasks = function() {
  */
 exports.getGroups = function() {
     return {
-        'default': [ 'dev', 'rsync' ]
+        'default': [ 'livereload' ]
     }
 };
 
