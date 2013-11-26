@@ -38,7 +38,9 @@ exports.getTasks = function() {
                 'addedFiles',
                 'modifiedFiles'
             ],
-            plugins: livereload()
+            plugins: [livereload()],
+            //任务执行最小间隔时间 milliseconds
+            intervalTime: 0
         },
         // 配置示例，相关插件还没开发
         // 'rsync': {
