@@ -11,15 +11,20 @@
 exports.baseDir = __dirname;
 
 /**
- * 常用过滤器
- * 
+ * 全局过滤器
+ * 会先进行一次过滤，以减少监控文件的数量。否则会有fsmonitor crash的情况
+ *
  * @inner
  * @namespace
  */
-var commonFilters = {
-    ignoreNodeModules: '!node_modules/*',
-    ignoreVCSFiles: '!.(git|svn)/*'
-}
+var globalFilters = {
+    ignoreNodeModules: '!(node_modules/*|*/node_modules/*)',
+    ignoreVCSFiles   : '!(*).(git|svn|idea)/*',
+    ignoreIDEFiles   : '!(*).(DS_Store)',
+    ignoreNodeConfig : '!(*)(.gitignore|packkage.json|*.md)'
+};
+
+exports.globalFilters = globalFilters;
 
 /**
  * 任务配置
@@ -30,9 +35,7 @@ exports.getTasks = function() {
     return {
         'livereload': {
             filters: [
-                '*.(html|js|coffee|less|styl|css)',
-                commonFilters.ignoreNodeModules,
-                commonFilters.ignoreVCSFiles
+                '*.(html|js|coffee|less|styl|css)'
             ],
             events: [
                 'addedFiles',
