@@ -7,6 +7,7 @@ var Monitor = require( './lib/monitor' );
 var Task = require( './lib/task' );
 var plugin = require( './lib/plugin' );
 var log = require( './lib/log' );
+var _ = require( 'lodash' );
 
 /**
  * 启动入口
@@ -18,7 +19,12 @@ var log = require( './lib/log' );
 function watch( conf, groupId ) {
     // init monitor
     var monitor = new Monitor();
-    monitor.init( conf.baseDir );
+    var filters = _.values( conf.globalFilters );
+
+    monitor.init( {
+        dir    : conf.baseDir,
+        filters: filters
+    } );
 
     // init plugins
     plugin.injectPlugin( conf );

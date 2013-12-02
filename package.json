@@ -1,17 +1,27 @@
 {
-    "name": "edp-watch",
-    "description": "Package for edp watch.",
-    "version": "0.1.0-beta.1",
-    "contributors": [
-        { "name": "firede", "email": "firede@firede.us" }
+    "name"           : "edp-watch",
+    "description"    : "Package for edp watch.",
+    "version"        : "0.1.0-beta.1",
+    "contributors"   : [
+        {
+            "name" : "firede",
+            "email": "firede@firede.us"
+        },
+        {
+            "name" : "qiaogang",
+            "email": "qiaogang2003@163.com"
+        }
     ],
-    "dependencies": {
-        "debug": "~0.7.3",
-        "chalk": "~0.3.0",
+    "dependencies"   : {
+        "debug"         : "~0.7.3",
+        "chalk"         : "~0.3.0",
         "path-to-regexp": "~0.0.2",
-        "tiny-lr": "~0.0.5",
-        "fsmonitor": "~0.2.2"
+        "tiny-lr"       : "~0.0.5",
+        "fsmonitor"     : "~0.2.2",
+        "lodash"        : "~2.3.0"
     },
-    "main": "index.js",
-    "repository": "git://github.com/ecomfe/edp-watch"
+    "main"           : "index.js",
+    "repository"     : "git://github.com/ecomfe/edp-watch",
+    "devDependencies": {
+    }
 }
