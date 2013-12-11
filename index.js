@@ -47,6 +47,6 @@ function watch( conf, groupId ) {
             );
         }
     });
-};
+}
 
 module.exports = watch;

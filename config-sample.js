@@ -24,6 +24,11 @@ var globalFilters = {
     ignoreNodeConfig : '!(*)(.gitignore|packkage.json|*.md)'
 };
 
+var commonFilters = {
+    staticFiles: '*.(tpl|html|js|coffee|less|styl|css|xml)',
+    mediaFiles: '*.(gif|jpg|jpeg|png|swf|fla|mp3)'
+};
+
 exports.globalFilters = globalFilters;
 
 /**
@@ -35,46 +40,57 @@ exports.getTasks = function() {
     return {
         'livereload': {
             filters: [
-                '*.(html|js|coffee|less|styl|css)'
+                commonFilters.staticFiles,
+                commonFilters.mediaFiles
             ],
             events: [
                 'addedFiles',
                 'modifiedFiles'
             ],
-            plugins: [livereload()],
+            plugins: [/*livereload()*/],
             //任务执行最小间隔时间 milliseconds
-            intervalTime: 1000
+            intervalTime: 3000
         },
-        // 配置示例，相关插件还没开发
-        // 'rsync': {
-        //     filters: [
-        //         '*.(js|css|html)',
-        //         '!node_modules/*',
-        //         '!.(git|svn)/*'
-        //     ],
-        //     events: [
-        //         'addedFiles',
-        //         'modifiedFiles',
-        //         'deletedFiles'
-        //     ],
-        //     plugins: [
-        //         jshint(),
-        //         csslint(),
-        //         htmlhint(),
-        //         rsync()
-        //     ]
-        // }
+
+        'rsync': {
+            filters: [
+                '*'
+            ],
+            events: [
+                'addedFiles',
+                'modifiedFiles',
+                'addedFolders',
+                'modifiedFolders'
+            ],
+            plugins: [
+                rsync( {
+                    //If rsync command is not in default path
+//                    cmd: '/usr/local/bin/rsync',
+                    //Relative to './' path
+//                    src: '',
+                    //Destination server, eg: rsync://[USER@]HOST[:PORT]/DEST
+                    dest: '',
+                    include: [],
+                    exclude: [
+                        '.*',
+                        'node_modules/'
+                    ]
+                } )
+            ],
+            intervalTime: 3000
+        }
     }
 };
 
 /**
  * 任务组配置
- * 
+ *
  * @return {Object}
  */
 exports.getGroups = function() {
     return {
-        'default': [ 'livereload' ]
+        'default': [ 'livereload' ],
+        'rsync': [ 'rsync' ]
     }
 };
 
