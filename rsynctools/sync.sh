@@ -6,7 +6,6 @@ LOG="rsyncd.log"
 PID="rsyncd.pid"
 CONF="rsyncd.conf"
 CUR_PATH=`(pwd)`
-ARG=$2
 
 function init() {
 	clear
@@ -32,7 +31,6 @@ function init() {
 
 		echo "Please input the path which you need to rsync: (current path: $CUR_PATH)"
 		read REL_PATH
-	#    USER_PATH=`(cd ~;pwd)`
 
 		RSYNC_PATH="$CUR_PATH/$REL_PATH"
 
@@ -74,12 +72,6 @@ function stop() {
 	echo "Rsync serive is stop!"
 }
 
-function restart() {
-	stop
-	start
-	echo "Rsync has restart!"
-}
-
 function status() {
 	STATUS=`ps -fe | grep rsync | grep -v 'grep'`
 	if [ "$STATUS" = "" ]; then
@@ -99,9 +91,6 @@ case $1 in
 	"stop")
 		stop
 		;;
-	"reboot")
-		restart
-		;;
 	"status")
 		status
 		;;
@@ -111,7 +100,6 @@ case $1 in
 		echo " init: initialize rsync config files."
 		echo " start: start rsync service."
 		echo " stop: stop rsync service."
-		echo " reboot: reboot rsync service. (TODO)"
 		echo " status: show rsync service status."
 		;;
 esac
