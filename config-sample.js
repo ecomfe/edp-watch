@@ -79,7 +79,7 @@ exports.getTasks = function() {
             ],
             intervalTime: 3000
         }
-    }
+    };
 };
 
 /**
@@ -91,7 +91,7 @@ exports.getGroups = function() {
     return {
         'default': [ 'livereload' ],
         'rsync': [ 'rsync' ]
-    }
+    };
 };
 
 exports.injectPlugin = function( plugins ) {
