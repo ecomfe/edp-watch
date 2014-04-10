@@ -1,7 +1,7 @@
 {
     "name"           : "edp-watch",
     "description"    : "Package for edp watch.",
-    "version"        : "0.1.2",
+    "version"        : "0.1.3",
     "contributors"   : [
         {
             "name" : "firede",
